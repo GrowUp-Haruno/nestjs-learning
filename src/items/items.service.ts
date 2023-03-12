@@ -29,12 +29,13 @@ export class ItemsService {
   async updateStatus(id: Item['id']): Promise<Item> {
     const updateItem = await this.findById(id);
     updateItem.status = ItemStatus.SOLD_OUT;
+    updateItem.updatedAt = new Date().toISOString();
 
     return await this.itemRepository.save(updateItem);
   }
 
   // Delete
   async deleteItem(id: Item['id']): Promise<void> {
-    await this.itemRepository.delete(id);
+    await this.itemRepository.delete({ id });
   }
 }
