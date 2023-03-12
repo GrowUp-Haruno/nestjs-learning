@@ -8,9 +8,9 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
+import { Item } from 'src/entities/item.entity';
 import { CreateItemDto } from 'src/items/dto/create-item.dto';
 
-import { Item } from 'src/items/item.model';
 import { ItemsService } from 'src/items/items.service';
 
 @Controller('items')
@@ -19,8 +19,8 @@ export class ItemsController {
 
   // Create
   @Post()
-  create(@Body() createItemDto: CreateItemDto): Item {
-    return this.itemsService.create(createItemDto);
+  async create(@Body() createItemDto: CreateItemDto): Promise<Item> {
+    return await this.itemsService.create(createItemDto);
   }
 
   // Read
