@@ -25,12 +25,13 @@ export class ItemsService {
     return foundItem;
   }
 
-  //Update
-  // updateStatus(id: Item['id']): Item {
-  //   const item = this.findById(id);
-  //   item.status = ItemStatus.SOLD_OUT;
-  //   return item;
-  // }
+  // Update
+  async updateStatus(id: Item['id']): Promise<Item> {
+    const updateItem = await this.findById(id);
+    updateItem.status = ItemStatus.SOLD_OUT;
+
+    return await this.itemRepository.save(updateItem);
+  }
 
   // Delete
   deleteItem(id: Item['id']) {
