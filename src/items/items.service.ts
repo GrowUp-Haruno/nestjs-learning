@@ -15,22 +15,22 @@ export class ItemsService {
   }
 
   // Read
-  findall(): Item[] {
-    return this.items;
+  async findall(): Promise<Item[]> {
+    return this.itemRepository.find();
   }
 
-  findById(id: Item['id']): Item {
-    const foundItem = this.items.find((item) => item.id === id);
+  async findById(id: Item['id']): Promise<Item> {
+    const foundItem = await this.itemRepository.findOne(id);
     if (!foundItem) throw new NotFoundException();
     return foundItem;
   }
 
   //Update
-  updateStatus(id: Item['id']): Item {
-    const item = this.findById(id);
-    item.status = ItemStatus.SOLD_OUT;
-    return item;
-  }
+  // updateStatus(id: Item['id']): Item {
+  //   const item = this.findById(id);
+  //   item.status = ItemStatus.SOLD_OUT;
+  //   return item;
+  // }
 
   // Delete
   deleteItem(id: Item['id']) {

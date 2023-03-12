@@ -25,20 +25,20 @@ export class ItemsController {
 
   // Read
   @Get()
-  findall(): Item[] {
+  async findall(): Promise<Item[]> {
     return this.itemsService.findall();
   }
 
   @Get(':id')
-  findById(@Param('id', ParseUUIDPipe) id: Item['id']): Item {
+  async findById(@Param('id', ParseUUIDPipe) id: Item['id']): Promise<Item> {
     return this.itemsService.findById(id);
   }
 
   // Update
-  @Patch(':id')
-  updateStatus(@Param('id', ParseUUIDPipe) id: Item['id']): Item {
-    return this.itemsService.updateStatus(id);
-  }
+  // @Patch(':id')
+  // updateStatus(@Param('id', ParseUUIDPipe) id: Item['id']): Item {
+  //   return this.itemsService.updateStatus(id);
+  // }
 
   // Delete
   @Delete(':id')
