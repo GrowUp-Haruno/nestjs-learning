@@ -44,7 +44,7 @@ export class ItemsController {
 
   // Delete
   @Delete(':id')
-  deleteItem(@Param('id', ParseUUIDPipe) id: Item['id']): void {
-    this.itemsService.deleteItem(id);
+  async deleteItem(@Param('id', ParseUUIDPipe) id: Item['id']): Promise<void> {
+    await this.itemsService.deleteItem(id);
   }
 }

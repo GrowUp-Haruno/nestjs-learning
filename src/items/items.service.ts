@@ -34,7 +34,7 @@ export class ItemsService {
   }
 
   // Delete
-  deleteItem(id: Item['id']) {
-    this.items = this.items.filter((item) => item.id !== id);
+  async deleteItem(id: Item['id']): Promise<void> {
+    await this.itemRepository.delete(id);
   }
 }
