@@ -14,8 +14,8 @@ module.exports = {
   entities: ['dist/entities/*.entity.js'],
   migrations: ['dist/migrations/*.js'],
   cli: {
-    entitiesDir: 'src/entries',
-    migrationsDir: 'src/migrations',
+    entitiesDir: '../entries',
+    migrationsDir: '../migrations',
   },
 };
 ```
@@ -23,7 +23,7 @@ module.exports = {
 2. entity ファイルを作成する
 
 ```ts:item.entity.ts
-import { ItemStatus } from 'src/items/item-status.enum';
+import { ItemStatus } from '../items/item-status.enum';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()

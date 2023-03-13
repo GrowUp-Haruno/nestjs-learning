@@ -3,11 +3,11 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { Item } from 'src/entities/item.entity';
+import { Item } from '../entities/item.entity';
 import { ItemStatus } from './item-status.enum';
 import { CreateItemDto } from './dto/create-item.dto';
-import { ItemRepository } from 'src/items/item.repository';
-import { User } from 'src/entities/user.entity';
+import { ItemRepository } from '../items/item.repository';
+import { User } from '../entities/user.entity';
 
 @Injectable()
 export class ItemsService {

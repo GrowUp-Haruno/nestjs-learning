@@ -1,5 +1,5 @@
-import { CreateUserDto } from 'src/auth/dto/create-user.dto';
-import { User } from 'src/entities/user.entity';
+import { CreateUserDto } from '../auth/dto/create-user.dto';
+import { User } from '../entities/user.entity';
 import { EntityRepository, Repository } from 'typeorm';
 
 @EntityRepository(User)
