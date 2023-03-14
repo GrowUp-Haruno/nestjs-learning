@@ -36,3 +36,9 @@ lerna-debug.log*
 
 # Docker
 /docker
+
+# .env
+.env
+
+# migrations
+/src/migrations/
