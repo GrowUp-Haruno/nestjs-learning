@@ -2,17 +2,10 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ItemsModule } from './items/items.module';
 import { AuthModule } from './auth/auth.module';
-// import { ConfigModule } from '@nestjs/config';
+import { BudgetModule } from './budget/budget.module';
 
 @Module({
-  imports: [
-    // ConfigModule.forRoot({
-    //   envFilePath: ['.env.development.local'],
-    // }),
-    ItemsModule,
-    TypeOrmModule.forRoot({}),
-    AuthModule,
-  ],
+  imports: [ItemsModule, TypeOrmModule.forRoot({}), AuthModule, BudgetModule],
   controllers: [],
   providers: [],
 })
