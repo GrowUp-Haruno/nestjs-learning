@@ -1,4 +1,4 @@
-import { User } from '../entities/user.entity';
+import { User } from './user.entity';
 import { ItemStatus } from '../items/item-status.enum';
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
