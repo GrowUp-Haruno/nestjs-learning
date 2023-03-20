@@ -12,8 +12,6 @@ import { User } from '../entities/user.entity';
 @Injectable()
 export class ItemsService {
   constructor(private readonly itemRepository: ItemRepository) {}
-  private items: Item[] = [];
-
   // Create
   async create(createItemDto: CreateItemDto, user: User): Promise<Item> {
     return this.itemRepository.createItem(createItemDto, user);
