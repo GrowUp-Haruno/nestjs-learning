@@ -8,11 +8,6 @@ import { UpdateBudgetDto } from './dto/update-budget.dto';
 @Injectable()
 export class BudgetService {
   constructor(private readonly budgetRepository: BudgetRepository) {}
-  // Create
-  async initial(user: User): Promise<Budget> {
-    return await this.budgetRepository.initial(user);
-  }
-
   // Read
   async findByUser(user: User): Promise<Budget> {
     const findBudget = await this.budgetRepository.findOne({ userId: user.id });
