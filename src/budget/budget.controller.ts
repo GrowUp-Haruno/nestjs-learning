@@ -2,28 +2,30 @@ import { User } from './../entities/user.entity';
 import {
   ClassSerializerInterceptor,
   Controller,
+  Get,
   Post,
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { GetUser } from '../auth/decorator/get-user.decorator';
-import { BudgetRepository } from './budget.repository';
+
 import { Budget } from '../entities/budget.entity';
+import { BudgetService } from './budget.service';
 
 @Controller('budget')
 @UseInterceptors(ClassSerializerInterceptor)
+@UseGuards(JwtAuthGuard)
 export class BudgetController {
-  constructor(private readonly budgetRepository: BudgetRepository) {}
+  constructor(private readonly budgetService: BudgetService) {}
 
   @Post()
-  @UseGuards(JwtAuthGuard)
   async initialBudget(@GetUser() user: User): Promise<Budget> {
-    return await this.budgetRepository.initial(user);
+    return await this.budgetService.initial(user);
   }
-  @Post('test')
-  @UseGuards(JwtAuthGuard)
-  async test(@GetUser() user: User): Promise<User> {
-    return await user;
+
+  @Get()
+  async findByUser(@GetUser() user: User): Promise<Budget> {
+    return await this.budgetService.findByUser(user);
   }
 }
