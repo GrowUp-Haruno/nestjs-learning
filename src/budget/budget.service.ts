@@ -9,6 +9,6 @@ export class BudgetService {
   constructor(private readonly budgetRepository: BudgetRepository) {}
   // Create
   async initialBudget(user: User): Promise<Budget> {
-    return await this.budgetRepository.initialBudget(user);
+    return await this.budgetRepository.initial(user);
   }
 }

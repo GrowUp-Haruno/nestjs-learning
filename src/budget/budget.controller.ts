@@ -19,7 +19,7 @@ export class BudgetController {
   @Post()
   @UseGuards(JwtAuthGuard)
   async initialBudget(@GetUser() user: User): Promise<Budget> {
-    return await this.budgetRepository.initialBudget(user);
+    return await this.budgetRepository.initial(user);
   }
   @Post('test')
   @UseGuards(JwtAuthGuard)

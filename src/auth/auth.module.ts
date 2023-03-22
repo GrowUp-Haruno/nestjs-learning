@@ -8,10 +8,12 @@ import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from './jwt.strategy';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { RolesGuard } from '../auth/guards/roles.guard';
+import { BudgetRepository } from '../budget/budget.repository';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([UserRepository]),
+    TypeOrmModule.forFeature([BudgetRepository]),
     PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.register({
       // secretはデプロイするときに環境変数に変更すること

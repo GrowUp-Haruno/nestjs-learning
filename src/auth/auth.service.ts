@@ -5,12 +5,14 @@ import { CreateUserDto } from '../auth/dto/create-user.dto';
 import { CredentialsDto } from '../auth/dto/credentials.dto';
 import { User } from '../entities/user.entity';
 import { UserRepository } from './user.repository';
+import { BudgetRepository } from '../budget/budget.repository';
 
 @Injectable()
 export class AuthService {
   constructor(
     private readonly userRepository: UserRepository,
     private readonly jwtService: JwtService,
+    private readonly budgetRepository: BudgetRepository,
   ) {}
 
   async signup(createUserDto: CreateUserDto): Promise<User> {
@@ -20,6 +22,7 @@ export class AuthService {
     const user = { userName, password: hashPassword, userStatus };
 
     const successUser = await this.userRepository.createUser(user);
+    this.budgetRepository.initial(successUser);
 
     return { ...successUser, password: 'secret', id: 'secret' };
   }

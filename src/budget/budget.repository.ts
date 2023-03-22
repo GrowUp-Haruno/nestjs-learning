@@ -5,7 +5,7 @@ import { EntityRepository, Repository } from 'typeorm';
 
 @EntityRepository(Budget)
 export class BudgetRepository extends Repository<Budget> {
-  async initialBudget(user: User): Promise<Budget> {
+  async initial(user: User): Promise<Budget> {
     const budget = this.create({
       budgets: [
         {
