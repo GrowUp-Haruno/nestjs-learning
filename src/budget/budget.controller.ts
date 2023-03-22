@@ -2,6 +2,7 @@ import { User } from './../entities/user.entity';
 import {
   ClassSerializerInterceptor,
   Controller,
+  Delete,
   Get,
   Patch,
   UseGuards,
@@ -30,7 +31,12 @@ export class BudgetController {
   async updateBudget(
     @GetUser() user: User,
     @Body() updateBudgetDto: UpdateBudgetDto,
-  ) {
+  ): Promise<Budget> {
     return await this.budgetService.update(user, updateBudgetDto);
+  }
+
+  @Delete()
+  async delete(@GetUser() user: User): Promise<Budget> {
+    return await this.budgetService.delete(user);
   }
 }

@@ -1,7 +1,7 @@
 import { User } from './../entities/user.entity';
 
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { BudgetRepository } from './budget.repository';
+import { BudgetRepository, initialBudgets } from './budget.repository';
 import { Budget } from '../entities/budget.entity';
 import { UpdateBudgetDto } from './dto/update-budget.dto';
 
@@ -19,6 +19,15 @@ export class BudgetService {
   async update(user: User, updateBudgetDto: UpdateBudgetDto): Promise<Budget> {
     const budget = await this.findByUser(user);
     budget.budgets = updateBudgetDto.budgets;
+    budget.updatedAt = new Date().toISOString();
+    await this.budgetRepository.save(budget);
+    return budget;
+  }
+
+  // Delete
+  async delete(user: User): Promise<Budget> {
+    const budget = await this.findByUser(user);
+    budget.budgets = initialBudgets;
     budget.updatedAt = new Date().toISOString();
     await this.budgetRepository.save(budget);
     return budget;
