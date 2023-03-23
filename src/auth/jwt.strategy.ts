@@ -4,15 +4,19 @@ import { ExtractJwt, Strategy } from 'passport-jwt';
 import { UserStatus } from '../auth/user-status.enum';
 import { User } from '../entities/user.entity';
 import { UserRepository } from './user.repository';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
-  constructor(private userRepository: UserRepository) {
+  constructor(
+    private userRepository: UserRepository,
+    private configService: ConfigService,
+  ) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       // JWTの有効期限を考慮する(false)か、無視(true)するか
       ignoreExpiration: false,
-      secretOrKey: 'secretkey123',
+      secretOrKey: configService.get<string>('JWT_SECRET'),
     });
   }
 
