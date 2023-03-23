@@ -1,6 +1,10 @@
 import { User } from './../entities/user.entity';
 
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  BadRequestException,
+} from '@nestjs/common';
 import { BudgetRepository, initialBudgets } from './budget.repository';
 import { Budget } from '../entities/budget.entity';
 import { UpdateBudgetDto } from './dto/update-budget.dto';
@@ -18,6 +22,10 @@ export class BudgetService {
   // Update
   async update(user: User, updateBudgetDto: UpdateBudgetDto): Promise<Budget> {
     const budget = await this.findByUser(user);
+    if (budget.userId !== user.id) {
+      throw new BadRequestException('他人の予算を変更することはできません');
+    }
+
     budget.budgets = updateBudgetDto.budgets;
     budget.updatedAt = new Date().toISOString();
     await this.budgetRepository.save(budget);
@@ -27,6 +35,10 @@ export class BudgetService {
   // Delete
   async delete(user: User): Promise<Budget> {
     const budget = await this.findByUser(user);
+    if (budget.userId !== user.id) {
+      throw new BadRequestException('他人の予算を削除することはできません');
+    }
+
     budget.budgets = initialBudgets;
     budget.updatedAt = new Date().toISOString();
     await this.budgetRepository.save(budget);
