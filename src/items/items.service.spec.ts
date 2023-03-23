@@ -29,6 +29,7 @@ const mockUser1: User = {
   password: '123',
   userStatus: UserStatus.PREMIUM,
   items: [],
+  budgets: [],
 };
 const mockUser2: User = {
   id: 'test-id-2',
@@ -36,6 +37,7 @@ const mockUser2: User = {
   password: '123',
   userStatus: UserStatus.FREE,
   items: [],
+  budgets: [],
 };
 
 describe('items service test', () => {
